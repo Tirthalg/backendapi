@@ -38,7 +38,7 @@ class QueryModel(BaseModel):
 async def get_contexts(query: QueryModel):
     try:
         # Retrieve top 5 contexts
-        results = pipeline.run(query=query.query, top_k_retriever=5)
+        results = pipeline.run(query=query.query, params={"Retriever": {"top_k": 5}})
         
         # Extract contexts
         contexts = [doc.content for doc in results['documents']]
