@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from haystack.document_stores import InMemoryDocumentStore
 from haystack.nodes import BM25Retriever
@@ -7,6 +8,20 @@ from haystack.schema import Document
 import os
 
 app = FastAPI()
+
+# CORS configuration
+origins = [
+    "http://localhost:3000",  # React app
+    "https://your-app-name.onrender.com",  # Production React app URL (if different)
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Read book content from a text file
 book_path = os.path.join(os.path.dirname(__file__), 'book.txt')
@@ -20,7 +35,7 @@ paragraphs = book_content.strip().split("\n\n")  # Assuming paragraphs are separ
 documents = [Document(content=para) for para in paragraphs]
 
 # Initialize DocumentStore
-document_store = InMemoryDocumentStore(use_bm25=True)
+document_store = InMemoryDocumentStore()
 
 # Write documents to the DocumentStore
 document_store.write_documents(documents)
