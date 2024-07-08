@@ -20,7 +20,7 @@ paragraphs = book_content.strip().split("\n\n")  # Assuming paragraphs are separ
 documents = [Document(content=para) for para in paragraphs]
 
 # Initialize DocumentStore
-document_store = InMemoryDocumentStore()
+document_store = InMemoryDocumentStore(use_bm25=True)
 
 # Write documents to the DocumentStore
 document_store.write_documents(documents)
