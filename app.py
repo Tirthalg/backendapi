@@ -29,7 +29,7 @@ with open(book_path, 'r', encoding='utf-8') as file:
     book_content = file.read()
 
 # Split the book content into paragraphs
-paragraphs = book_content.strip().split("\n\n")  # Assuming paragraphs are separated by double newlines
+paragraphs = book_content.strip().split("\n")  # Assuming paragraphs are separated by double newlines
 
 # Create Document objects for each paragraph
 documents = [Document(content=para) for para in paragraphs]
