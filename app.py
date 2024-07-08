@@ -12,7 +12,7 @@ app = FastAPI()
 # CORS configuration
 origins = [
     "http://localhost:3000",  # React app
-    "https://vachanguru.netlify.app/",  # Production React app URL (if different)
+    "https://vachanguru.netlify.app",  # Production React app URL (if different)
 ]
 
 app.add_middleware(
