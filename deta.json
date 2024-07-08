@@ -1,0 +1,5 @@
+{
+  "name": "your-app-name",
+  "runtime": "python3.9",
+  "entrypoint": "app.py"
+}
